@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Your Firebase Data Dashboard</title>
@@ -20,10 +19,10 @@
 
         .data-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+            grid-template-columns: repeat(4, 1fr); /* Four columns */
             gap: 20px; /* Gap between items */
             justify-content: center;
-            padding: 20px; /* Reduce padding for mobile */
+            padding: 20px;
         }
 
         .data-item {
@@ -44,12 +43,6 @@
         .data-value {
             font-size: 24px;
             color: white;
-        }
-
-        @media (max-width: 768px) {
-            .data-container {
-                grid-template-columns: 1fr; /* Single column on small screens */
-            }
         }
     </style>
 
