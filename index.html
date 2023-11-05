@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Your Firebase Data Dashboard</title>
@@ -13,20 +14,20 @@
         }
 
         h1 {
-            font-size: 36px;
-            margin: 20px 0;
+            font-size: 2rem;
+            margin: 1rem 0;
         }
 
         .data-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Four columns */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
             gap: 20px; /* Gap between items */
             justify-content: center;
-            padding: 20px;
+            padding: 1rem;
         }
 
         .data-item {
-            padding: 20px;
+            padding: 1rem;
             border-radius: 10px;
             background-color: #abccf526;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -34,18 +35,23 @@
         }
 
         .data-name {
-            font-size: 18px;
+            font-size: 1rem;
             font-weight: bold;
             color: white;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
 
         .data-value {
-            font-size: 24px;
+            font-size: 1.5rem;
             color: white;
         }
-    </style>
 
+        @media (max-width: 768px) {
+            .data-container {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+        }
+    </style>
     <!-- Include the Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
