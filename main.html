@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Firebase Data Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: #182C49;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 20px 0;
+        }
+
+        .data-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 3 columns */
+            gap: 20px; /* Gap between items */
+            justify-content: center;
+            padding: 100px;
+        }
+
+        .data-item {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #abccf526;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .data-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .data-value {
+            font-size: 24px;
+            color: white;
+        }
+    </style>
+    <!-- Include the Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+</head>
+<body>
+    <h1>KINGSY</h1>
+    <div class="data-container" id="data-container">
+        <!-- Data items will be dynamically added here -->
+    </div>
+
+    <script>
+        // Replace with your Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAY_tyWIzt3NUSr3xVwp0zw7Db3Qz4lcOk",
+  authDomain: "kingsy-80959.firebaseapp.com",
+  databaseURL: "https://kingsy-80959-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "kingsy-80959",
+  storageBucket: "kingsy-80959.appspot.com",
+  messagingSenderId: "938252572255",
+  appId: "1:938252572255:web:7ccdc924b4c477db13adea"
+};
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Function to fetch and display Firebase data
+        function fetchDataAndDisplay() {
+            var dataContainer = document.getElementById("data-container");
+
+            // Firebase database reference to your data
+            var database = firebase.database();
+            var dataRef = database.ref("/"); // Update with your data path
+
+            // Listen for changes in the data and update the webpage
+            dataRef.on("value", function(snapshot) {
+                var data = snapshot.val();
+                dataContainer.innerHTML = ""; // Clear previous data
+
+                // Create data items for each value
+                for (var key in data) {
+                    var item = data[key];
+                    var dataItem = document.createElement("div");
+                    dataItem.className = "data-item";
+
+                    var name = document.createElement("div");
+                    name.className = "data-name";
+                    name.textContent = key;
+
+                    var value = document.createElement("div");
+                    value.className = "data-value";
+                    value.textContent = item; // Access the value directly
+
+                    dataItem.appendChild(name);
+                    dataItem.appendChild(value);
+                    dataContainer.appendChild(dataItem);
+                }
+            });
+        }
+
+        // Call the function to start fetching and displaying data
+        fetchDataAndDisplay();
+    </script>
+</body>
+</html>
