@@ -1,9 +1,10 @@
+Copy code
 <!DOCTYPE html>
 <html>
 <head>
     <title>Your Firebase Data Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <style>
+    <style>
         body {
             background-color: #182C49;
             font-family: Arial, sans-serif;
@@ -14,8 +15,8 @@
         }
 
         h1 {
-            font-size: 2rem;
-            margin: 1rem 0;
+            font-size: 36px;
+            margin: 20px 0;
         }
 
         .data-container {
@@ -23,11 +24,11 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
             gap: 20px; /* Gap between items */
             justify-content: center;
-            padding: 1rem;
+            padding: 20px; /* Reduce padding for mobile */
         }
 
         .data-item {
-            padding: 1rem;
+            padding: 20px;
             border-radius: 10px;
             background-color: #abccf526;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -35,20 +36,26 @@
         }
 
         .data-name {
-            font-size: 1rem;
+            font-size: 18px;
             font-weight: bold;
             color: white;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
         }
 
         .data-value {
-            font-size: 1.5rem;
+            font-size: 24px;
             color: white;
         }
 
         @media (max-width: 768px) {
             .data-container {
-                grid-template-columns: repeat(2, 1fr); /* Two columns on small screens */
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .data-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
             }
         }
     </style>
