@@ -1,121 +1,117 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 400px;
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-button {
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
-  background-color: #4285f4;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-  margin-top: 24px;
-}
-
-button:hover {
-  background-color: #3367d6;
-}
-
-button:focus {
-  outline: none;
-}
-
-button:active {
-  background-color: #085797;
-}
-
-h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 24px;
-}
-
- img {
-      width: 200px;
-      height: 200px;
-      margin-bottom: 24px;
-    }
-
-@media (max-width: 768px) {
-  .container {
-    max-width: 100%;
-  }
-}
-
-</style>
-</head>
-<body>
-<div class="container">
- 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithCredential } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
-       
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAY_tyWIzt3NUSr3xVwp0zw7Db3Qz4lcOk",
-  authDomain: "kingsy-80959.firebaseapp.com",
-  databaseURL: "https://kingsy-80959-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "kingsy-80959",
-  storageBucket: "kingsy-80959.appspot.com",
-  messagingSenderId: "938252572255",
-  appId: "1:938252572255:web:7ccdc924b4c477db13adea"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-        const auth = getAuth();
-        function onSignIn(googleUser) {
-          var profile = googleUser.getBasicProfile();
-          var idToken = googleUser.getAuthResponse().id_token;
-          var credential = GoogleAuthProvider.credential(idToken);
-          signInWithCredential(auth, credential)
-            .then(function (result) {
-              var user = result.user;
-              console.log("Authenticated user:", user);
-            })
-            .catch(function (error) {
-              console.log("Authentication error:", error);
-            });
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('305310981_934238114164582_1136901629197607433_n.png');
+            background-size: cover;
+            background-repeat: no-repeat;
         }
-        document.getElementById("google-signin-button").addEventListener("click", function () {
-  var provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-    .then(function(result) {
-      var user = result.user;
-      window.location.href = "enter.html?displayName=" + encodeURIComponent(auth.currentUser.displayName);
-    })
-    .catch(function(error) {
-      console.log("Authentication error:", error);
-    });
-});
-</script>
-        
-    <button id="google-signin-button">Sign in with Google</button>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 16px;
+            box-sizing: border-box;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            background-color: #4285f4;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-top: 24px;
+        }
+
+        button:hover {
+            background-color: #3367d6;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button:active {
+            background-color: #085797;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 24px;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+            import { getAuth, GoogleAuthProvider, signInWithCredential } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+            import { signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyAY_tyWIzt3NUSr3xVwp0zw7Db3Qz4lcOk",
+                authDomain: "kingsy-80959.firebaseapp.com",
+                databaseURL: "https://kingsy-80959-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "kingsy-80959",
+                storageBucket: "kingsy-80959.appspot.com",
+                messagingSenderId: "938252572255",
+                appId: "1:938252572255:web:7ccdc924b4c477db13adea"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth();
+
+            document.getElementById("google-signin-button").addEventListener("click", function () {
+                var provider = new GoogleAuthProvider();
+                signInWithPopup(auth, provider)
+                    .then(function (result) {
+                        var user = result.user;
+                        window.location.href = "enter.html?displayName=" + encodeURIComponent(auth.currentUser.displayName);
+                    })
+                    .catch(function (error) {
+                        console.log("Authentication error:", error);
+                    });
+            });
+        </script>
+
+        <button id="google-signin-button">Sign in with Google</button>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+    </div>
 </body>
+
 </html>
