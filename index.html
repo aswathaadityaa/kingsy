@@ -24,21 +24,25 @@
             padding: 16px;
             box-sizing: border-box;
             text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            padding: 20px;
+            position: relative;
+            background: white;
+            border-radius: 0;
+            padding: 0;
         }
 
         button {
-            padding: 12px 24px;
+            padding: 12px 20px;
             font-size: 16px;
             border: none;
             background-color: #4285f4;
             color: white;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 8px;
             transition: background-color 0.3s ease;
-            margin-top: 24px;
+            position: absolute;
+            bottom: -300px; /* Adjust the value as needed */
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         button:hover {
