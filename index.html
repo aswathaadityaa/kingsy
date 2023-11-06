@@ -1,87 +1,81 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Firebase Data Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <style>
-        body {
-            background-color: #182C49;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
-        h1 {
-            font-size: 36px;
-            margin: 20px 0;
-        }
+.container {
+  max-width: 400px;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+}
 
-        .data-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            justify-content: center;
-            padding: 20px;
-        }
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  background-color: #4285f4;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-top: 24px;
+}
 
-        .data-item {
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #abccf526;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+button:hover {
+  background-color: #3367d6;
+}
 
-        .data-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-        }
+button:focus {
+  outline: none;
+}
 
-        .data-value {
-            font-size: 24px;
-            color: white;
-        }
+button:active {
+  background-color: #085797;
+}
 
-        @media (max-width: 768px) {
-            .data-container {
-                grid-template-columns: 1fr;
-            grid-gap: 10px;
-            }
-        }
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 24px;
+}
 
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .data-container {
-                grid-template-columns: repeat(2, 1fr);
-                grid-gap: 20px;
-            }
-        }
+ img {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 24px;
+    }
 
-        @media (min-width: 1025px) {
-            .data-container {
-                grid-template-columns: repeat(4, 1fr);
-                grid-gap: 20px;
-            }
-        }
-    </style>    <!-- Include the Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
 
-
+</style>
 </head>
 <body>
+<div class="container">
+ 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithCredential } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+       
 
-    <h1>KINGSY</h1>
-    <div class="data-container" id="data-container">
-        <!-- Data items will be dynamically added here -->
-    </div>
-
-    <script>
-        // Replace with your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAY_tyWIzt3NUSr3xVwp0zw7Db3Qz4lcOk",
   authDomain: "kingsy-80959.firebaseapp.com",
@@ -92,45 +86,36 @@ const firebaseConfig = {
   appId: "1:938252572255:web:7ccdc924b4c477db13adea"
 };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Function to fetch and display Firebase data
-        function fetchDataAndDisplay() {
-            var dataContainer = document.getElementById("data-container");
-
-            // Firebase database reference to your data
-            var database = firebase.database();
-            var dataRef = database.ref("/"); // Update with your data path
-
-            // Listen for changes in the data and update the webpage
-            dataRef.on("value", function(snapshot) {
-                var data = snapshot.val();
-                dataContainer.innerHTML = ""; // Clear previous data
-
-                // Create data items for each value
-                for (var key in data) {
-                    var item = data[key];
-                    var dataItem = document.createElement("div");
-                    dataItem.className = "data-item";
-
-                    var name = document.createElement("div");
-                    name.className = "data-name";
-                    name.textContent = key;
-
-                    var value = document.createElement("div");
-                    value.className = "data-value";
-                    value.textContent = item; // Access the value directly
-
-                    dataItem.appendChild(name);
-                    dataItem.appendChild(value);
-                    dataContainer.appendChild(dataItem);
-                }
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        function onSignIn(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          var idToken = googleUser.getAuthResponse().id_token;
+          var credential = GoogleAuthProvider.credential(idToken);
+          signInWithCredential(auth, credential)
+            .then(function (result) {
+              var user = result.user;
+              console.log("Authenticated user:", user);
+            })
+            .catch(function (error) {
+              console.log("Authentication error:", error);
             });
         }
-
-        // Call the function to start fetching and displaying data
-        fetchDataAndDisplay();
-    </script>
+        document.getElementById("google-signin-button").addEventListener("click", function () {
+  var provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then(function(result) {
+      var user = result.user;
+      window.location.href = "enter.html?displayName=" + encodeURIComponent(auth.currentUser.displayName);
+    })
+    .catch(function(error) {
+      console.log("Authentication error:", error);
+    });
+});
+</script>
+        
+    <button id="google-signin-button">Sign in with Google</button>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 </html>
